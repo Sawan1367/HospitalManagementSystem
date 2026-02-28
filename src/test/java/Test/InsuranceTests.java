@@ -39,6 +39,7 @@ public class InsuranceTests extends AbstractTestNGSpringContextTests {
 		
 		Patient patient = insuranceService.assignInsuranceToPatient(insurance, 1L);
 		System.out.println(patient);
+		
 	}
 	
 	@Test
@@ -55,6 +56,12 @@ public class InsuranceTests extends AbstractTestNGSpringContextTests {
 		var updatedAppointment = appointmentService.reassignAppointmentToAnotherDoctor(appointment.getId(), 3L);
 	
 		System.out.println(updatedAppointment);
+	}
+	
+	@Test
+	public void testDisAssignInsurance() {
+		Patient patient = insuranceService.disAssociateInsuranceFromParent(1L);
+		System.out.println(patient);
 	}
 	
 }

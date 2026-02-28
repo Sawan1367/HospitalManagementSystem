@@ -28,4 +28,14 @@ public class InsuranceServiceImpl implements InsuranceService {
 		
 		return patient;
 	}
+	
+	@Override
+	@Transactional
+	public Patient disAssociateInsuranceFromParent(Long patientId) {
+		Patient patient = patientRepository.findById(patientId).orElseThrow(() -> new EntityNotFoundException("Patient not found with patient id : " + patientId));
+		
+		patient.setInsurance(null);
+		
+		return patient;
+	}
 }

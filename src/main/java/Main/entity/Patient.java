@@ -86,7 +86,7 @@ public class Patient {
     @Enumerated(EnumType.STRING)
     private BloodGroupType bloodGroup;
     
-    @OneToOne(cascade = CascadeType.ALL /*or {CascadeType.MERGE, CascadeType.PERSIST}*/)
+    @OneToOne(cascade = CascadeType.ALL /*or {CascadeType.MERGE, CascadeType.PERSIST}*/, orphanRemoval = true)
     @JoinColumn(name = "patient_insurance_id") // Join owning side (parent)
     private Insurance insurance;
     
