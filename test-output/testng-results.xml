@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2026-02-28T15:14:12 IST" name="Default suite" finished-at="2026-02-28T15:14:19 IST" duration-ms="6687">
+    <groups>
+    </groups>
+    <test started-at="2026-02-28T15:14:12 IST" name="Default test" finished-at="2026-02-28T15:14:19 IST" duration-ms="6687">
+      <class name="Test.PatientTests">
+        <test-method is-config="true" signature="springTestContextBeforeTestClass()[pri:0, instance:Test.PatientTests@68b6f0d6]" started-at="2026-02-28T15:14:12 IST" name="springTestContextBeforeTestClass" finished-at="2026-02-28T15:14:12 IST" duration-ms="48" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestClass -->
+        <test-method is-config="true" signature="springTestContextPrepareTestInstance()[pri:0, instance:Test.PatientTests@68b6f0d6]" started-at="2026-02-28T15:14:12 IST" name="springTestContextPrepareTestInstance" finished-at="2026-02-28T15:14:18 IST" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" duration-ms="5975" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextPrepareTestInstance -->
+        <test-method is-config="true" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:Test.PatientTests@68b6f0d6]" started-at="2026-02-28T15:14:18 IST" name="springTestContextBeforeTestMethod" finished-at="2026-02-28T15:14:19 IST" duration-ms="400" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test.PatientTests.testPatientRepository()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method signature="testPatientRepository()[pri:0, instance:Test.PatientTests@68b6f0d6]" started-at="2026-02-28T15:14:19 IST" name="testPatientRepository" finished-at="2026-02-28T15:14:19 IST" duration-ms="104" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testPatientRepository -->
+        <test-method is-config="true" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:Test.PatientTests@68b6f0d6]" started-at="2026-02-28T15:14:19 IST" name="springTestContextAfterTestMethod" finished-at="2026-02-28T15:14:19 IST" duration-ms="4" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test.PatientTests.testPatientRepository()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method is-config="true" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:Test.PatientTests@68b6f0d6]" started-at="2026-02-28T15:14:19 IST" name="springTestContextBeforeTestMethod" finished-at="2026-02-28T15:14:19 IST" duration-ms="2" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test.PatientTests.testTransactionMethods()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method signature="testTransactionMethods()[pri:0, instance:Test.PatientTests@68b6f0d6]" started-at="2026-02-28T15:14:19 IST" name="testTransactionMethods" finished-at="2026-02-28T15:14:19 IST" duration-ms="104" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testTransactionMethods -->
+        <test-method is-config="true" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:Test.PatientTests@68b6f0d6]" started-at="2026-02-28T15:14:19 IST" name="springTestContextAfterTestMethod" finished-at="2026-02-28T15:14:19 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void Test.PatientTests.testTransactionMethods()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method is-config="true" signature="springTestContextAfterTestClass()[pri:0, instance:Test.PatientTests@68b6f0d6]" started-at="2026-02-28T15:14:19 IST" name="springTestContextAfterTestClass" finished-at="2026-02-28T15:14:19 IST" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestClass -->
+      </class> <!-- Test.PatientTests -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
