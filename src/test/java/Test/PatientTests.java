@@ -42,7 +42,7 @@ public class PatientTests extends AbstractTestNGSpringContextTests {
 
 //        List<Patient> patientList = patientRepository.findByBornAfterDate(LocalDate.of(1993, 3, 14));
 
-        Page<Patient> patientList = patientRepository.findAllPatients(PageRequest.of(1, 2, Sort.by("name")));
+        Page<Patient> patientList = patientRepository.findAllPatients(PageRequest.of(0, 2, Sort.by("name")));
 
         for(Patient patient: patientList) {
             System.out.println(patient);
