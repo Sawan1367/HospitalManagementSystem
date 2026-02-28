@@ -8,6 +8,7 @@ import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 
 import Main.entity.type.BloodGroupType;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -84,7 +85,7 @@ public class Patient {
     @Enumerated(EnumType.STRING)
     private BloodGroupType bloodGroup;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL /*or {CascadeType.MERGE, CascadeType.PERSIST}*/)
     @JoinColumn(name = "patient_insurance_id") // Join owning side
     private Insurance insurance;
     

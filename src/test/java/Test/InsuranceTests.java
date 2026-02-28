@@ -7,11 +7,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
 
+import Main.EnterSpringBootAppliction;
 import Main.entity.Insurance;
 import Main.entity.Patient;
 import Main.service.InsuranceService;
 
-@SpringBootTest
+@SpringBootTest(classes = EnterSpringBootAppliction.class)
 public class InsuranceTests extends AbstractTestNGSpringContextTests {
 	
 	@Autowired 
@@ -24,6 +25,11 @@ public class InsuranceTests extends AbstractTestNGSpringContextTests {
 				.provider("HDFC")
 				.validUntil(LocalDate.of(2030, 12, 12))
 				.build();
+		
+		/**
+		 * In @Transactional Context, we need to save before moving to the Persistence Context
+		 * and over here that is taken care by cascade defined in Patient.java entity
+		 */
 		
 		Patient patient = insuranceService.assignInsuranceToPatient(insurance, 1L);
 		System.out.println(patient);
