@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Builder
 public class Appointment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,10 +37,12 @@ public class Appointment {
 	private String reason;
 	
 	@ManyToOne /*Many Appointments to One Patient*/
+	@ToString.Exclude
 	@JoinColumn(name = "appointment_patient_id", nullable = false) // patient is required and not nullable
 	private Patient patient;
 	
 	@ManyToOne
+	@ToString.Exclude
 	@JoinColumn(name = "appointment_doctor_id", nullable = false)
 	private Doctor doctor;
 }

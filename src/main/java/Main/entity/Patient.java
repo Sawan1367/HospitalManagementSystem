@@ -3,6 +3,7 @@ package Main.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -89,7 +90,8 @@ public class Patient {
     @JoinColumn(name = "patient_insurance_id") // Join owning side (parent)
     private Insurance insurance;
     
-    @OneToMany(mappedBy = "patient")
-    private List<Appointment> appointments;
+    @OneToMany(mappedBy = "patient"/*, fetch = FetchType.EAGER*/)
+    @ToString.Exclude
+    private List<Appointment> appointments = new ArrayList<>();
 
 }

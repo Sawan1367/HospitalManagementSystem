@@ -1,5 +1,6 @@
 package Main.entity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,9 +38,9 @@ public class Doctor {
 	@Column(nullable = false, unique = true, length = 100)
 	private String email;
 	
-	@OneToMany(mappedBy = "doctor")
-	private List<Appointment> appointments;
-	
 	@ManyToMany(mappedBy = "doctors")
 	private Set<Department> departments = new HashSet<>();
+	
+	@OneToMany(mappedBy = "doctor")
+	private List<Appointment> appointments = new ArrayList<>();
 }

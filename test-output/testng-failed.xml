@@ -5,11 +5,11 @@
     <classes>
       <class name="Test.InsuranceTests">
         <methods>
-          <include name="testInsurance"/>
           <include name="springTestContextBeforeTestClass"/>
           <include name="springTestContextBeforeTestMethod"/>
           <include name="springTestContextPrepareTestInstance"/>
           <include name="springTestContextAfterTestClass"/>
+          <include name="testCreateAppointment"/>
           <include name="springTestContextAfterTestMethod"/>
         </methods>
       </class> <!-- Test.InsuranceTests -->
