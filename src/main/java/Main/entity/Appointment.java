@@ -1,18 +1,15 @@
 package Main.entity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,26 +23,22 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Builder
-public class Insurance {
-	
+public class Appointment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable = false, unique = true, length = 50)
-	private String policyNumber;
-	
-	@Column(nullable = false, length = 100)
-	private String provider;
-	
 	@Column(nullable = false)
-	private LocalDate validUntil;
+	private LocalDateTime appointmentTime;
 	
-	@CreationTimestamp
-	@Column(nullable = false, updatable = false)
-	private LocalDateTime createdAt; 
+	@Column(length = 500)
+	private String reason;
 	
-	@OneToOne(mappedBy = "insurance_id") // Join inverse side
+	@ManyToOne /*Many Appointments to One Patient*/
+	@JoinColumn(name = "appointment_patient_id", nullable = false) // patient is required and not nullable
 	private Patient patient;
+	
+	@ManyToOne
+	@JoinColumn(name = "appointment_doctor_id", nullable = false)
+	private Doctor doctor;
 }
