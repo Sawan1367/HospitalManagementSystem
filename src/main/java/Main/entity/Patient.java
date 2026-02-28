@@ -14,6 +14,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -86,11 +87,16 @@ public class Patient {
     @Enumerated(EnumType.STRING)
     private BloodGroupType bloodGroup;
     
+    /**
+     * orphanRemoval removes the child entities from when they are no longer being referenced by the parent, but the parent remains in the DB
+     * 
+     * CascadeType.REMOVE removes the child entities from the DB, only when the parent entity is removed
+     */
     @OneToOne(cascade = CascadeType.ALL /*or {CascadeType.MERGE, CascadeType.PERSIST}*/, orphanRemoval = true)
     @JoinColumn(name = "patient_insurance_id") // Join owning side (parent)
     private Insurance insurance;
     
-    @OneToMany(mappedBy = "patient"/*, fetch = FetchType.EAGER*/)
+    @OneToMany(mappedBy = "patient", orphanRemoval = true, fetch = FetchType.EAGER) // It causes N+1 problem (it is getting auto-populated) - It can be solved with the help of custom queries
     @ToString.Exclude
     private List<Appointment> appointments = new ArrayList<>();
 
