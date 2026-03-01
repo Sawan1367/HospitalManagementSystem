@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import Main.dto.PatientResponseDto;
 import Main.entity.Patient;
 import Main.repository.PatientRepository;
 import Main.service.PatientService;
@@ -23,17 +24,17 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     @Transactional
-    public Patient getPatientById(Long patientId) {
+    public PatientResponseDto getPatientById(Long patientId) {
         Patient patient = patientRepository.findById(patientId).orElseThrow(() -> new EntityNotFoundException("Patient Not " +
                 "Found with id: " + patientId));
-        return modelMapper.map(patient, Patient.class);
+        return modelMapper.map(patient, PatientResponseDto.class);
     }
 
     @Override
-    public List<Patient> getAllPatients(Integer pageNumber, Integer pageSize) {
+    public List<PatientResponseDto> getAllPatients(Integer pageNumber, Integer pageSize) {
         return patientRepository.findAllPatients(PageRequest.of(pageNumber, pageSize))
                 .stream()
-                .map(patient -> modelMapper.map(patient, Patient.class))
+                .map(patient -> modelMapper.map(patient, PatientResponseDto.class))
                 .collect(Collectors.toList());
     }
 }

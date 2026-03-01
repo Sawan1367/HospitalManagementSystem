@@ -2,9 +2,9 @@ package Main.service;
 
 import java.util.List;
 
-import Main.entity.Patient;
+import Main.dto.PatientResponseDto;
 
 public interface PatientService {
-	Patient getPatientById(Long patientId);
-	List<Patient> getAllPatients(Integer pageNumber, Integer pageSize);
+	PatientResponseDto getPatientById(Long patientId);
+	List<PatientResponseDto> getAllPatients(Integer pageNumber, Integer pageSize);
 }

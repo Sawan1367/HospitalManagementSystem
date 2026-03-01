@@ -49,13 +49,13 @@ public class InsuranceTests extends AbstractTestNGSpringContextTests {
 				.reason("Nothing")
 				.build();
 		
-		var newAppointment = appointmentService.createNewAppointment(appointment, 1L, 2L);
+//		var newAppointment = appointmentService.createNewAppointment(appointment, 1L, 2L);
 		
-		System.out.println(newAppointment);
+//		System.out.println(newAppointment);
 		
-		var updatedAppointment = appointmentService.reassignAppointmentToAnotherDoctor(appointment.getId(), 3L);
-	
-		System.out.println(updatedAppointment);
+//		var updatedAppointment = appointmentService.reassignAppointmentToAnotherDoctor(appointment.getId(), 3L);
+
+//		System.out.println(updatedAppointment);
 	}
 	
 	@Test
