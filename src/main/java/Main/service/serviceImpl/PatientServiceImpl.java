@@ -19,8 +19,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PatientServiceImpl implements PatientService {
 
-    private PatientRepository patientRepository;
-    private ModelMapper modelMapper;
+    private final PatientRepository patientRepository;
+    private final ModelMapper modelMapper;
 
     @Override
     @Transactional

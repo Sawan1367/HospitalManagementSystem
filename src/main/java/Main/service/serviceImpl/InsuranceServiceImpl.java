@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import Main.entity.Insurance;
 import Main.entity.Patient;
-import Main.repository.InsuranceRepository;
+//import Main.repository.InsuranceRepository;
 import Main.repository.PatientRepository;
 import Main.service.InsuranceService;
 import jakarta.persistence.EntityNotFoundException;
@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor /*you must declare all the instance variables as final because you are using @RequiredArgsConstructor*/
 public class InsuranceServiceImpl implements InsuranceService {
 	
-	private final InsuranceRepository insuranceRepository;
+//	private final InsuranceRepository insuranceRepository;
 	private final PatientRepository patientRepository;
 	
 	@Override
