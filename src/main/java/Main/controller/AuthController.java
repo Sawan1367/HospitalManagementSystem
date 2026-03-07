@@ -3,7 +3,7 @@ package Main.controller;
 import Main.dto.LoginRequestDto;
 import Main.dto.LoginResponseDto;
 import Main.dto.SignUpResponseDto;
-import Main.service.AuthService;
+import Main.security.securityService.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

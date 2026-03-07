@@ -19,4 +19,16 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username).orElseThrow();
     }
+
+
+    /**
+     *
+     * Spring internally uses
+     *
+     * AuthenticationManager
+     *       ↓
+     * DaoAuthenticationProvider
+     *       ↓
+     * UserDetailsService.loadUserByUsername()
+     */
 }

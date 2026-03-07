@@ -1,4 +1,4 @@
-package Main.service;
+package Main.security.securityService;
 
 import Main.dto.LoginRequestDto;
 import Main.dto.LoginResponseDto;

@@ -1,6 +1,7 @@
 package Main.security;
 
 import Main.entity.User;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ClaimsMutator;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -32,4 +33,13 @@ public class AuthUtil {
                 .compact();
     }
 
+    public String getUsernameFromToken(String token) {
+        Claims claims =  Jwts.parser()
+                .verifyWith(getSecretKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+
+        return claims.getSubject();
+    }
 }

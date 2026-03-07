@@ -1,4 +1,4 @@
-package Main.service.serviceImpl;
+package Main.security.securityService.securityServiceImpl;
 
 import Main.dto.LoginRequestDto;
 import Main.dto.LoginResponseDto;
@@ -6,9 +6,8 @@ import Main.dto.SignUpResponseDto;
 import Main.entity.User;
 import Main.repository.UserRepository;
 import Main.security.AuthUtil;
-import Main.service.AuthService;
+import Main.security.securityService.AuthService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
