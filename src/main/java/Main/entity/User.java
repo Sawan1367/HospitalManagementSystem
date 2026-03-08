@@ -31,6 +31,13 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "provider id")
+    private String providerId;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "provider type")
+    private String providerType;
+
     @Override
 //    @NullMarked
     public Collection<? extends GrantedAuthority> getAuthorities() {
