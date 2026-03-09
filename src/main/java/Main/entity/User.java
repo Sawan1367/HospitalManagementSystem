@@ -1,5 +1,6 @@
 package Main.entity;
 
+import Main.entity.type.AuthProviderType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -36,7 +37,7 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "provider type")
-    private String providerType;
+    private AuthProviderType providerType;
 
     @Override
 //    @NullMarked
