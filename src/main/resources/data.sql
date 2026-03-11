@@ -27,5 +27,5 @@ VALUES
   ('2025-07-05 16:15:00', 'Consultation', 1, 4),
   ('2025-07-06 08:30:00', 'Allergy Treatment', 2, 5);
   
-  
+
 */

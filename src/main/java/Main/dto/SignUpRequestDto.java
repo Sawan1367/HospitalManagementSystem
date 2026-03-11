@@ -1,13 +1,14 @@
 package Main.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import Main.entity.type.RoleType;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class SignUpRequestDto {
@@ -15,5 +16,5 @@ public class SignUpRequestDto {
     private String password;
     private String name;
 
-//    private Set<RoleType> roles = new HashSet<>();
+    private Set<RoleType> roles = new HashSet<>();
 }

@@ -6,24 +6,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import Main.entity.type.BloodGroupType;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Index;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -79,6 +65,21 @@ public class Patient {
     private String email;
 
     private String gender;
+
+    @OneToOne
+    @MapsId
+    /**
+     * @MapsId annotation is used when two entities share the same primary key, usually in a One-to-One relationship.
+     * Use the primary key of the parent entity as the primary key of this entity as well.
+     *
+     * Normally in relationships you have:
+        * A primary key
+        * A foreign key
+     * But sometimes you want:
+        * The foreign key to also be the primary key
+     * That’s when @MapsId is used.
+     */
+    private User user;
 
     @CreationTimestamp
     @Column(updatable = false)
