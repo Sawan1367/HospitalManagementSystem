@@ -1,6 +1,8 @@
 package Main.security;
 
 import Main.entity.User;
+import Main.entity.type.PermissionType;
+import Main.entity.type.RoleType;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -8,7 +10,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
@@ -17,39 +21,49 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import java.io.IOException;
 
 @Slf4j
 @Configuration
 @RequiredArgsConstructor
+@EnableMethodSecurity
 public class WebSecurityConfig {
 
 	private final JwtAuthFilter jwtAuthFilter;
 	private final OAuth2SuccessHandler oAuth2SuccessHandler;
+	private final HandlerExceptionResolver handlerExceptionResolver;
 
-    @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+	@Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity
 				.csrf(csrfConfig -> csrfConfig.disable())
-				.sessionManagement(sessionConfig -> sessionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.sessionManagement(sessionConfig ->
+						sessionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(auth -> auth
 						.requestMatchers("/public/**", "/auth/**").permitAll()
-//						.requestMatchers("/admin/**").hasRole("ADMIN")
-//						.requestMatchers("/doctors/**").hasAnyRole("ADMIN", "DOCTOR")
-								.anyRequest().authenticated()
+						.requestMatchers(HttpMethod.DELETE, "/admin/**")
+						.hasAnyAuthority(PermissionType.APPOINTMENT_DELETE.name(),
+								PermissionType.USER_MANAGE.name())
+						.requestMatchers("/admin/**").hasRole(RoleType.ADMIN.name())
+						.requestMatchers("/doctors/**").hasAnyRole(RoleType.DOCTOR.name(), RoleType.ADMIN.name())
+						.anyRequest().authenticated()
 				)
 				.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-				.oauth2Login(oauth2 -> oauth2.failureHandler(
-						new AuthenticationFailureHandler() {
-							@Override
-							public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-								log.error("OAuth2 error : {}", exception.getMessage());
-							}
-						}
+				.oauth2Login(oAuth2 -> oAuth2
+						.failureHandler((request, response, exception) -> {
+							log.error("OAuth2 error: {}", exception.getMessage());
+							handlerExceptionResolver.resolveException(request, response, null, exception);
+						})
+						.successHandler(oAuth2SuccessHandler)
 				)
-						.successHandler(oAuth2SuccessHandler));
-//		.formLogin(Customizer.withDefaults());
+				.exceptionHandling(exceptionHandlingConfigurer ->
+						exceptionHandlingConfigurer.accessDeniedHandler((request, response, accessDeniedException) -> {
+							handlerExceptionResolver.resolveException(request, response, null, accessDeniedException);
+						}));
+
+//                .formLogin();
 		return httpSecurity.build();
 	}
 

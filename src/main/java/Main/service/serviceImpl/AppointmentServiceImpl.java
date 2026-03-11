@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import Main.dto.AppointmentResponseDto;
@@ -53,6 +54,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 	
 	@Override
 	@Transactional
+	@PreAuthorize("hasAuthority('appointment:write') or #doctorId == authentication.principal.id")
 	public Appointment reassignAppointmentToAnotherDoctor(Long appointmentId, Long doctorId) {
 		Appointment appointment = appointmentRepository.findById(appointmentId).orElseThrow();
 		Doctor doctor = doctorRepository.findById(doctorId).orElseThrow();
@@ -64,6 +66,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 	}
 	
 	@Override
+	@PreAuthorize("hasRole('ADMIN') OR (hasRole('DOCTOR') AND #doctorId == authentication.principal.id)")
 	public List<AppointmentResponseDto> getAllAppointmentsOfDoctor(Long doctorId) {
         Doctor doctor = doctorRepository.findById(doctorId).orElseThrow();
 

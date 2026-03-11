@@ -2,6 +2,7 @@ package Main.entity;
 
 import Main.entity.type.AuthProviderType;
 import Main.entity.type.RoleType;
+import Main.security.RolePermissionMapping;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -57,8 +58,18 @@ public class User implements UserDetails {
     @Override
 //    @NullMarked
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream()
-                .map(role -> new SimpleGrantedAuthority("ROLE_"+role.name()))
-                .collect(Collectors.toSet());
+//        return roles.stream()
+//                .map(role -> new SimpleGrantedAuthority("ROLE_"+role.name()))
+//                .collect(Collectors.toSet());
+
+        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+        roles.forEach(
+                role -> {
+                    Set<SimpleGrantedAuthority> permissions = RolePermissionMapping.getAuthoritiesForRole(role);
+                    authorities.addAll(permissions);
+                    authorities.add(new SimpleGrantedAuthority("ROLE_"+role.name()));
+                }
+        );
+        return authorities;
     }
 }
